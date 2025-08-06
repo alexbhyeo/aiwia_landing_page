@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -28,7 +28,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -51,13 +51,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EC7E738C1C6642EAB3BA37E99122577F }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_474CFF6FE49E4B52B0464E36AAF2C5AC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1C47412CA77C4542BD269FDD6E2717E5 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6784A9DDA9DA483E9F71C491D8FF8831 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8E3B001158844424974C1BF450C1862E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_40EEB161236C401483D1DC805E6DB380 }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'aiwia'
           slot-name: 'Production'
